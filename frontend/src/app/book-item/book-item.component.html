@@ -1,0 +1,19 @@
+<div class="book-item" (click)="onBookClicked()">
+
+    <div class="label">
+        {{ book.book_name }}
+    </div>
+    <div class="label">
+        {{ book.ganre_name }}
+    </div>
+
+    <div class="book-controls-box" appToolTipSingleton (click)="$event.stopPropagation()">
+        <div class="book-control-button" appToolTip="Edit Book" (click)="onEditClicked()">
+            <i class="material-icons">edit</i>
+        </div>
+
+        <div class="book-control-button is-danger" appToolTip="Delete Book" (click)="onDeleteClicked()">
+            <i class="material-icons">delete</i>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<section class="heading-section">
+  <h1 class="title is-1 has-text-centered">my books</h1>
+</section>
+
+<div class="container">
+
+  <div class="container add-book-box-container">
+    <div *ngFor="let genre of ganres; let i = index;" class="form-check filter checkbox container"
+      style="padding-right:20px;">
+      <label class="form-check-label">
+        <input type="checkbox" (change)="onChange($event)" class="form-check-input" [(ngModel)]="genre.checked"
+          [value]="genre.ganre_id"> {{genre.ganre_name}}
+      </label>
+    </div>
+
+    <div class="add-book-box">
+
+      <form #form="ngForm" (ngSubmit)="onFormSubmit(form)">
+        <h2 class="title is-5">add new book</h2>
+
+        <div class="field is-grouped" style="margin: 0">
+          <p class="control ">
+            <input ngModel #bookTextField="ngModel" required name="text" class="input" type="text"
+              placeholder="Type book name  here">
+          </p>
+          <p>
+          <div class="select">
+            <select ngModel #bookTextField="ngModel" name="ganre_id">
+              <option value="{{ganre.ganre_id}}" *ngFor="let ganre of ganres">{{ganre.ganre_name}}</option>
+            </select>
+          </div>
+
+
+          <p class="control">
+            <button type="submit" class="button alt-gradient-button">
+              <i class="material-icons">add</i>
+              Add
+            </button>
+          </p>
+        </div>
+
+
+
+        <div *ngIf="bookTextField.invalid && showValidationErrors">
+          <p class="help is-danger" *ngIf="bookTextField.errors.required">Please enter the text of your book</p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="books-list">
+
+        <app-book-item *ngFor="let book of filteredBooks" [book]="book" (editClicked)="editBook(book)"
+          (deleteClicked)="deleteBook(book)">
+        </app-book-item>
+
+      </div>
+
+    </div>
+  </section>
